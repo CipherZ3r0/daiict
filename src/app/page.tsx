@@ -1,103 +1,143 @@
-import Image from "next/image";
+// src/app/page.tsx - Landing page with hero section and Get Started button
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Badge } from '@/components/ui/badge'
+import { Leaf, Shield, Users, Zap } from 'lucide-react'
 
-export default function Home() {
+export default function LandingPage() {
   return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
-
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+    <div className="min-h-screen">
+      {/* Hero Section */}
+      <section className="container mx-auto px-4 py-20 text-center">
+        <div className="flex justify-center mb-6">
+          <div className="p-3 bg-green-100 rounded-full">
+            <Leaf className="h-8 w-8 text-green-600" />
+          </div>
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+        
+        <h1 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6">
+          Green Hydrogen
+          <span className="text-green-600 block">Subsidy Platform</span>
+        </h1>
+        
+        <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+          A blockchain-powered platform connecting green hydrogen producers with government funding, 
+          ensuring transparent milestone verification and secure fund distribution.
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Link href="/login">
+            <Button size="lg" className="bg-green-600 hover:bg-green-700 text-white px-8 py-3">
+              Get Started
+            </Button>
+          </Link>
+          <Button variant="outline" size="lg" className="px-8 py-3">
+            Learn More
+          </Button>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="container mx-auto px-4 py-16">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-4">Platform Features</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">
+            Our platform streamlines the entire subsidy process from application to fund distribution
+          </p>
+        </div>
+        
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="mx-auto p-3 bg-blue-100 rounded-full w-fit">
+                <Users className="h-6 w-6 text-blue-600" />
+              </div>
+              <CardTitle className="text-lg">Role-Based Access</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Separate dashboards for Producers, Government officials, and Auditors
+              </CardDescription>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="mx-auto p-3 bg-green-100 rounded-full w-fit">
+                <Shield className="h-6 w-6 text-green-600" />
+              </div>
+              <CardTitle className="text-lg">Blockchain Security</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Smart contracts ensure secure fund locking and milestone-based releases
+              </CardDescription>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="mx-auto p-3 bg-purple-100 rounded-full w-fit">
+                <Zap className="h-6 w-6 text-purple-600" />
+              </div>
+              <CardTitle className="text-lg">Automated Verification</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Streamlined milestone verification process with auditor oversight
+              </CardDescription>
+            </CardContent>
+          </Card>
+          
+          <Card className="text-center hover:shadow-lg transition-shadow">
+            <CardHeader>
+              <div className="mx-auto p-3 bg-orange-100 rounded-full w-fit">
+                <Leaf className="h-6 w-6 text-orange-600" />
+              </div>
+              <CardTitle className="text-lg">Green Focus</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <CardDescription>
+                Dedicated to supporting sustainable green hydrogen projects
+              </CardDescription>
+            </CardContent>
+          </Card>
+        </div>
+      </section>
+
+      {/* Stats Section */}
+      <section className="bg-white py-16">
+        <div className="container mx-auto px-4 text-center">
+          <div className="grid md:grid-cols-3 gap-8">
+            <div>
+              <div className="text-3xl font-bold text-green-600 mb-2">$2.5M+</div>
+              <div className="text-gray-600">Funds Distributed</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-blue-600 mb-2">150+</div>
+              <div className="text-gray-600">Projects Funded</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold text-purple-600 mb-2">98%</div>
+              <div className="text-gray-600">Verification Rate</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-900 text-white py-8">
+        <div className="container mx-auto px-4 text-center">
+          <div className="flex justify-center items-center mb-4">
+            <Leaf className="h-6 w-6 text-green-500 mr-2" />
+            <span className="font-semibold">Green Hydrogen Platform</span>
+          </div>
+          <p className="text-gray-400">
+            Empowering sustainable energy through transparent funding
+          </p>
+        </div>
       </footer>
     </div>
-  );
+  )
 }
