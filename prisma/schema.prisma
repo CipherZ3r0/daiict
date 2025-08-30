@@ -1,0 +1,75 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql" // or "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  role      Role
+  wallet    Wallet?
+  subsidies SubsidyRequest[]
+  createdAt DateTime @default(now())
+}
+
+model Wallet {
+  id        String   @id @default(cuid())
+  address   String   @unique
+  balance   Float    @default(0)
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @unique
+}
+
+model SubsidyRequest {
+  id          String   @id @default(cuid())
+  producer    User     @relation(fields: [producerId], references: [id])
+  producerId  String
+  status      SubsidyStatus @default(PENDING)
+  amount      Float
+  description String
+  documents   Json?
+  milestones  Milestone[]
+  transactions Transaction[]
+  createdAt   DateTime @default(now())
+}
+
+model Milestone {
+  id           String   @id @default(cuid())
+  subsidy      SubsidyRequest @relation(fields: [subsidyId], references: [id])
+  subsidyId    String
+  description  String
+  approved     Boolean @default(false)
+  auditorNotes String?
+  createdAt    DateTime @default(now())
+}
+model Transaction {
+  id           String   @id @default(cuid())
+  fromAddress  String
+  toAddress    String
+  amount       Float
+  txHash       String   @unique
+  subsidy      SubsidyRequest? @relation(fields: [subsidyId], references: [id])
+  subsidyId    String?
+  createdAt    DateTime @default(now())
+}
+
+enum Role {
+  PRODUCER
+  GOVERNMENT
+  AUDITOR
+  ADMIN
+}
+
+enum SubsidyStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  TERMINATED
+  COMPLETED
+}
