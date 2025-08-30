@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ProjectCard from '@/components/ProjectCard'
 import WalletConnectButton from '@/components/WalletConnectButton'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from "@/hooks/use-toast"
 import { apiService } from '@/lib/api'
 import { lockFunds } from '@/lib/blockchain'
 import { FileText, CheckCircle2, XCircle, AlertTriangle, Lock, Users } from 'lucide-react'

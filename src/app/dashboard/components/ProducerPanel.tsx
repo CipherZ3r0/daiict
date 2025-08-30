@@ -8,7 +8,7 @@ import { Badge } from '@/components/ui/badge'
 import ProjectCard from '@/components/ProjectCard'
 import ProjectFormModal from '@/components/ProjectFormModal'
 import WalletConnectButton from '@/components/WalletConnectButton'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from "@/hooks/use-toast"
 import { apiService } from '@/lib/api'
 import { Plus, Briefcase, Clock, CheckCircle2, XCircle } from 'lucide-react'
 

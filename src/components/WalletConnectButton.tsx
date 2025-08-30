@@ -8,7 +8,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, Di
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Alert, AlertDescription } from '@/components/ui/alert'
-import { useToast } from '@/components/ui/use-toast'
+import { useToast } from '@/hooks/use-toast'
 import { connectWallet, disconnectWallet, getWalletInfo } from '@/lib/blockchain'
 import { Wallet, WalletCards, AlertTriangle, Key } from 'lucide-react'
 

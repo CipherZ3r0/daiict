@@ -8,8 +8,12 @@ import { Badge } from '@/components/ui/badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import ProjectCard from '@/components/ProjectCard'
 import MilestoneCard from '@/components/MilestoneCard'
-import { useToast } from '@/components/ui/use-toast'
-import { apiService } from '@/lib/api'
+// Update the import path if the file is located elsewhere, for example:
+import { useToast } from "@/hooks/use-toast"
+
+// Or, if you have a local hook, adjust accordingly:
+// import { useToast } from '../../components/ui/use-toast'
+import apiService from '@/lib/api'
 import { Shield, Clock, CheckCircle2, AlertTriangle, FileCheck } from 'lucide-react'
 
 interface User {
