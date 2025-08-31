@@ -1,26 +1,45 @@
 import { NextRequest, NextResponse } from "next/server";
 import dbConnect from "@/lib/dbConnect";
-import SubsidyRequest from "@/models/SubsidyRequest";
+import SubsidyRequest, { SubsidyStatus } from "@/models/SubsidyRequest";
+import mongoose from "mongoose";
+import { User } from "@/models/User";
 
-export const config = { api: { bodyParser: false } }; // important for FormData
 
+// GET all projects
+export async function GET(req: NextRequest) {
+  await dbConnect();
+  try {
+    const projects = await SubsidyRequest.find().populate("producer");
+    return NextResponse.json(projects);
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Failed to fetch projects" }, { status: 500 });
+  }
+}
+
+// POST new project
 export async function POST(req: NextRequest) {
   await dbConnect();
-  const userId = "68b3113e2ca855c0ce724fa6"; // replace with session auth
+  try {
+    const data = await req.formData();
+    const name = data.get("name") as string;
+    const description = data.get("description") as string;
 
-  // parse multipart form data
-  const formData = await req.formData();
-  const name = formData.get("name") as string;
-  const description = formData.get("description") as string;
-  const documents = formData.getAll("documents"); // array of uploaded files
+    // Replace with actual producer ID (from auth/session)
+    const producerId = new mongoose.Types.ObjectId("68b3113e2ca855c0ce724fa6");
 
-  const newProject = await SubsidyRequest.create({
-    producer: userId,
-    description,
-    amount: 0,
-    milestones: [],
-    documents: documents.map((file) => ({ name: (file as File).name })),
-  });
+    const newSubsidy = await SubsidyRequest.create({
+      producer: producerId,
+      status: SubsidyStatus.PENDING,
+      amount: 0,
+      description,
+      documents: [], // handle uploaded files later
+      milestones: [],
+    });
 
-  return NextResponse.json(newProject);
+    return NextResponse.json(newSubsidy, { status: 201 });
+  } catch (err) {
+    console.error(err);
+    return NextResponse.json({ error: "Failed to apply project" }, { status: 500 });
+  }
 }

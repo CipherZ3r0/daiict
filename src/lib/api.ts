@@ -7,7 +7,7 @@ export async function fetchProjects() {
 export async function applyProject(data: FormData) {
   const res = await fetch("/api/users/projects", {
     method: "POST",
-    body: data
+    body: data,
   });
   if (!res.ok) throw new Error("Failed to apply project");
   return res.json();

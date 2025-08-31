@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from "mongoose";
+import mongoose, { Schema, Document, Model, models } from "mongoose";
 
 export interface IUser extends Document {
   name: string;
@@ -10,12 +10,8 @@ export interface IUser extends Document {
 const UserSchema = new Schema<IUser>({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }, // we will hash later
-  role: {
-    type: String,
-    enum: ["producer", "government", "auditor"],
-    required: true
-  }
+  password: { type: String, required: true },
+  role: { type: String, enum: ["producer", "government", "auditor"], required: true },
 });
 
-export default mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
+export const User: Model<IUser> = models.User || mongoose.model<IUser>("User", UserSchema);
